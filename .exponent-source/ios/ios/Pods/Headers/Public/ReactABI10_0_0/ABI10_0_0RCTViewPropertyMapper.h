@@ -1,0 +1,1 @@
+../../../../versioned-react-native/ABI10_0_0/Libraries/NativeAnimation/ABI10_0_0RCTViewPropertyMapper.h

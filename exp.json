@@ -1,0 +1,34 @@
+{
+  "name": "uiexample",
+  "description": "An empty new project",
+  "slug": "uiexample",
+  "privacy": "public",
+  "sdkVersion": "14.0.0",
+  "version": "1.0.0",
+  "orientation": "portrait",
+  "primaryColor": "#cccccc",
+  "icon": "https://s3.amazonaws.com/exp-brand-assets/ExponentEmptyManifest_192.png",
+  "loading": {
+    "icon": "https://s3.amazonaws.com/exp-brand-assets/ExponentEmptyManifest_192.png",
+    "hideExponentText": false
+  },
+  "packagerOpts": {
+    "assetExts": [
+      "ttf",
+      "mp4"
+    ]
+  },
+  "ios": {
+    "supportsTablet": true,
+    "bundleIdentifier": "uiexample.yaba.exp"
+  },
+  "android": {
+    "package": "uiexample.yaba.exp"
+  },
+  "isDetached": true,
+  "detach": {
+    "scheme": "exp3c8224d2e203483e9f06cdd7ecd515a1",
+    "iosExponentViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v1.13.1-sdk14.0.0-06dab271-a23b-436f-a19e-1c86c16067b9.tar.gz",
+    "androidExponentViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v1.13.2-sdk14.0.0-5d431a7c-7837-4793-96f3-a1a131b6eadf.tar.gz"
+  }
+}

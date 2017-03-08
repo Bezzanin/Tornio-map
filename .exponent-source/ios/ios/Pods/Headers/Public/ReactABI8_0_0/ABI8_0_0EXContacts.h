@@ -1,0 +1,1 @@
+../../../../versioned-react-native/ABI8_0_0/Exponent/Modules/Api/ABI8_0_0EXContacts.h

@@ -1,0 +1,1 @@
+../../../../versioned-react-native/ABI9_0_0/Exponent/Modules/Api/Components/ABI9_0_0EXLinearGradientManager.h

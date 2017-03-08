@@ -1,0 +1,1 @@
+../../../../versioned-react-native/ABI7_0_0/Exponent/ABI7_0_0EXVersionManager.h

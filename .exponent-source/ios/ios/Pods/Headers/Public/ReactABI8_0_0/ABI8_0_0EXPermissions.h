@@ -1,0 +1,1 @@
+../../../../versioned-react-native/ABI8_0_0/Exponent/Modules/Api/Permissions/ABI8_0_0EXPermissions.h
