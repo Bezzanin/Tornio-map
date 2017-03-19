@@ -9,7 +9,7 @@ export default function ListItem({ title, description, onPress }) {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.description}>{description}</Text>
+      <Text adjustsFontSizeToFit={true} style={styles.description}>{description}</Text>
     </TouchableOpacity>
   );
 }
@@ -17,10 +17,14 @@ export default function ListItem({ title, description, onPress }) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: 'rgba(0, 0, 0, .1)',
+    // borderBottomWidth: StyleSheet.hairlineWidth,
+    // borderBottomColor: 'rgba(0, 0, 0, .1)',
+    borderWidth: 1,
+    borderColor: 'black',
     paddingVertical: 10,
     paddingHorizontal: 14,
+    width: 300,
+    marginHorizontal: 15,
   },
 
   title: {

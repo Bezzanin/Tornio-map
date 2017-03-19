@@ -29,13 +29,7 @@ export default class HomeScreen extends Component {
     }
   }
 
-  componentWillMount(){
-    api.getNews().then((res) => {
-      this.setState({
-        news: res.news
-      })
-    });
-  }
+ 
 
   render() {
     console.log("News: ", this.state.news);
