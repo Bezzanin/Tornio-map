@@ -5,6 +5,11 @@ import { Icon } from 'react-native-elements';
 import { Router } from '../../main';
 import main from '../../main';
 class Icons extends Component {
+
+    constructor(props) {
+    super(props);
+    this._goToScreen=this._goToScreen.bind(this);
+   }
 static route = {
     navigationBar: {
       title: 'Examples',
@@ -96,10 +101,7 @@ const styles = StyleSheet.create({
       height: 3,
       width: 0
     }
-    /* Rectangle 3 Copy 8: */
-// background: #FFFFFF;
-// box-shadow: 0 1px 3px 0 rgba(0,0,0,0.15);
-// border-radius: 6px;
+    
   },
   iconText: {
     justifyContent: 'center',

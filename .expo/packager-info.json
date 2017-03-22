@@ -1,10 +1,10 @@
 {
   "exponentServerPort": null,
   "packagerPort": 19001,
-  "packagerPid": 94305,
+  "packagerPid": 599,
   "exponentServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "packagerNgrokUrl": "https://packager.b2-3sf.shokh.uiexample.exp.direct",
+  "ngrokPid": 626,
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": null
+  "expoServerNgrokUrl": "https://b2-3sf.shokh.uiexample.exp.direct"
 }
