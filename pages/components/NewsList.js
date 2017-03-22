@@ -35,7 +35,7 @@ class NewsList extends Component {
     return (
         <View>
         <ListView
-        pagingEnabled={true}
+        
         horizontal={true}
         enableEmptySections 
         dataSource={this.state.dataSource}

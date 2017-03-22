@@ -5,6 +5,7 @@ import DrawerNavigationExample from './pages/DrawerNavigationExample';
 import HomeScreen from './pages/HomeScreen';
 import AboutScreen from './pages/AboutScreen';
 import MapScreen from './pages/MapScreen';
+import EventList from './pages/components/EventsList'
 
 import {
   createRouter,
@@ -32,6 +33,7 @@ export const Router = createRouter(() => ({
   home: () => HomeScreen,
   about: () => AboutScreen,
   map: () => MapScreen,
+  EventList: () => EventListScreen,
   
 }));
 

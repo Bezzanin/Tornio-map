@@ -21,7 +21,7 @@ export default class HomeScreen extends Component {
   
   static route = {
     navigationBar: {
-      title: 'Examples',
+      title: 'Tornio Atlas',
     },
   }
 

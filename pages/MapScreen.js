@@ -62,6 +62,21 @@ export default class MapScreen extends Component {
               latitude: 65.8442,
               longitude: 24.1443,
             }}
+            image={require('../assets/food1.png')}
+          />
+          <Components.MapView.Marker
+            coordinate={{
+              latitude: 65.8472,
+              longitude: 24.1447,
+            }}
+            image={require('../assets/food1.png')}
+          />
+          <Components.MapView.Marker
+            coordinate={{
+              latitude: 65.8454,
+              longitude: 24.1474,
+            }}
+            image={require('../assets/food1.png')}
           />
           </Components.MapView>
         );
