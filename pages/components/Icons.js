@@ -4,6 +4,10 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-nati
 import { Icon } from 'react-native-elements';
 import { Router } from '../../main';
 import main from '../../main';
+import { withNavigation } from '@exponent/ex-navigation';
+
+
+@withNavigation
 class Icons extends Component {
 
     constructor(props) {

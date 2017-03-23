@@ -15,6 +15,7 @@ import { Icon } from 'react-native-elements';
 import Weather from './components/Weather';
 import NewsList from './components/NewsList';
 import EventsList from './components/EventsList';
+import Icons from './components/Icons'
 
 
 export default class HomeScreen extends Component {
@@ -37,63 +38,7 @@ export default class HomeScreen extends Component {
       <ScrollView>
         <Weather />
         <View style={styles.bgRectangular} />
-        <ScrollView horizontal style={styles.iconsContainer}>
-          <TouchableOpacity onPress={this._goToScreen('map', 'restaurants')}>
-            <View>
-              <View style={styles.placeIcon}>
-                  <Icon name="restaurant" 
-                        size={60}
-                        color="#00BAF7"
-                        />
-              </View>
-                <Text style={styles.iconText} >Restaurants</Text>                 
-            </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this._goToScreen('map', 'hotels')}>
-            <View>
-              <View style={styles.placeIcon}>
-                  <Icon name="hotel" 
-                        size={60}
-                        color="#00BAF7"
-                        />
-              </View>
-                <Text style={styles.iconText} >Hotels</Text>                 
-            </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this._goToScreen('map', 'activities')}>
-            <View>
-              <View style={styles.placeIcon}>
-                  <Icon name="local-activity" 
-                        size={60}
-                        color="#00BAF7"
-                        />
-              </View>
-                <Text style={styles.iconText} >Activity</Text>                 
-            </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this._goToScreen('map', 'stores')}>
-            <View>
-              <View style={styles.placeIcon}>
-                  <Icon name="store" 
-                        size={60}
-                        color="#00BAF7"
-                        />
-              </View>
-                <Text style={styles.iconText} >Malls</Text>                 
-            </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this._goToScreen('map', 'wi-fi zones')}>
-            <View>
-              <View style={styles.placeIcon}>
-                  <Icon name="wifi" 
-                        size={60}
-                        color="#00BAF7"
-                        />
-              </View>
-                <Text style={styles.iconText} >Wifi</Text>                 
-            </View>
-            </TouchableOpacity>
-        </ScrollView>
+        <Icons />
         <NewsList />
         <EventsList />
       </ScrollView>
