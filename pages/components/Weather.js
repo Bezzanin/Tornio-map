@@ -31,9 +31,10 @@ constructor(props) {
 
   render() {
     return (
-       <Image source={require('../../assets/Tower.jpg')} 
-        resizeMode={Image.resizeMode.fill} style={styles.header}>
+       <Image source={require('../../assets/hero.png')} 
+         style={styles.header}>
        	 <View style={styles.center}>
+            <Text style={styles.lowerText1}>Tornio</Text>
             <Text style={styles.lowerText}> Temperature: {Math.round(this.state.temperature) + "°C"} </Text>
             <Text style={styles.lowerText}> Humidity: {this.state.humidity} </Text>
   				  <Text style={styles.lowerText}> Wind Speed: {this.state.windSpeed} </Text>
@@ -53,10 +54,25 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   lowerText: {
+    color: '#FFFFFF',
     backgroundColor: 'transparent',
     justifyContent: 'center',
     alignSelf: 'center',
+    fontSize: 20,
+  },
+  lowerText1: {
+    color: '#FFFFFF',
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    fontWeight: 'bold',
     fontSize: 25,
+  },
+  header: {
+    flex: 1,
+    alignSelf: 'stretch',
+    width: null,
+    height: 200,
   }
   
 });

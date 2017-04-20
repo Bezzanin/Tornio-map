@@ -3,12 +3,14 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Image
 } from 'react-native';
 
-export default function NewsItem({ title, description, onPress }) {
+export default function NewsItem({ title, description, image, onPress }) {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Text style={styles.title}>{title}</Text>
+      <Image source={{uri: image}} style={{flex: 1, resizeMode: 'cover'}}></Image>
       <Text adjustsFontSizeToFit={false} 
       style={styles.description}
       numberOfLines={5}

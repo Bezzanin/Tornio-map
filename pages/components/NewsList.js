@@ -19,11 +19,11 @@ class NewsList extends Component {
 }
 
   componentWillMount() {
-    fetch('https://newsapi.org/v1/articles?source=the-next-web&sortBy=latest&apiKey=8dc245ee80ae4aeeb28415c4375ff641')
+    fetch('http://www.json.pub/kegs/1f947ee5ad3b/tap.json')
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
-           dataSource: this.state.dataSource.cloneWithRows(responseData.articles),
+           dataSource: this.state.dataSource.cloneWithRows(responseData.events),
         });
       })
       .done();
@@ -43,8 +43,9 @@ class NewsList extends Component {
         renderRow={(article) => {
             return (
                 <NewsItem
-                    title={article.title}
+                    title={article.name}
                     description={article.description}
+                    image={article.coverPicture}
                 />
             )
         }}

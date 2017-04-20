@@ -1,16 +1,20 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, WebView, Linking } from "react-native";
-import FBSDK from 'react-native-fbsdk';
+import { View, Text, StyleSheet, TouchableOpacity, WebView, Linking, ListView, ScrollView, Keyboard } from "react-native";
 import { Card, ListItem, Button } from 'react-native-elements'
 import { Router } from '../../main';
+import moment from 'moment';
 
 class EventsList extends Component {
 
   constructor(props) {
     super(props);
     this._goToScreen = this._goToScreen.bind(this);
-   
-  }
+    this.state = {
+      events: [],
+       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+    }
+}
+
 
    static route = {
     navigationBar: {
@@ -27,48 +31,73 @@ class EventsList extends Component {
   }
 
 
+  componentWillMount() {
+    fetch('http://www.json.pub/kegs/1f947ee5ad3b/tap.json')
+      .then((response) => response.json())
+      .then((responseData) => {
+        this.setState({
+          events: responseData.events,
+        });
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRows(this.state.events),
+        });
+      })
+      .done();
+      };
+
+
     
   
-handleClick = () => {
-  const url = "https://www.suurpilkit.fi/"
-    Linking.canOpenURL(url).then(supported => {
-      if (supported) {
-        Linking.openURL(url);
-      } else {
-        console.log('Don\'t know how to open URI: ' + url);
-      }
-    });
-  };
 
-handleClick2 = () => {
-  const url = "http://www.torandaonice.com/info/in-english.html"
-    Linking.canOpenURL(url).then(supported => {
-      if (supported) {
-        Linking.openURL(url);
-      } else {
-        console.log('Don\'t know how to open URI: ' + url);
-      }
-    });
-  };
+
 
   render() {
     return (
-        <View>
-           <Card
-  title='Tornio Ice fishing competition'
-  image={require('../../assets/pict2.jpg')}>
-  <Text style={{marginBottom: 10}}>
-   Tornion Suurpilkit is an ice fishing event for the entire family. The competition is arranged every year on the Tornio river ice, at the center of the city.
-  </Text>
-  <Button
-    onPress={this.handleClick}
-    icon={{name: 'code'}}
-    backgroundColor='#03A9F4'
-    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-    title='VIEW NOW' />
-</Card>
+        <ScrollView>
+           <ListView
+        
+        horizontal={false}
+        enableEmptySections 
+        dataSource={this.state.dataSource}
+        onScroll={() => Keyboard.dismiss()}
+        renderRow={(event) => {
+            handleClick = () => {
+            const url = "https://www.facebook.com/events/"+event.id+"/"
+            Linking.canOpenURL(url).then(supported => {
+             if (supported) {
+            Linking.openURL(url);
+            } else {
+          console.log('Don\'t know how to open URI: ' + url);
+           }
+          });
+          };
 
-  <Card
+            return (
+            <Card
+                image={{uri: event.coverPicture}}
+                title={event.name}>
+              <Text 
+                numberOfLines={15}
+                style={{marginBottom: 10}}
+                >{event.description}</Text>
+              <Text
+                style={{marginBottom: 10}}
+                >Date: {moment(event.startTime).format('LLL')}</Text>
+              <Text
+                style={{marginBottom: 10}}
+                >Place: {event.venue.name}</Text>
+              <Button
+                onPress={handleClick}
+                icon={{name: 'code'}}
+                backgroundColor='#03A9F4'
+                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                title='Read More' />
+              </Card>
+            )
+        }}
+        />
+
+  {/*<Card
   title='Toranda on Ice 2'
   image={require('../../assets/pict3.png')}>
   <Text style={{marginBottom: 10}}>
@@ -80,8 +109,8 @@ handleClick2 = () => {
     backgroundColor='#03A9F4'
     buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
     title='VIEW NOW' />
-</Card>
-      </View>
+</Card>*/}
+      </ScrollView>
     );
   }
 }

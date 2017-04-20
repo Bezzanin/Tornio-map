@@ -13,5 +13,25 @@
 	<array>
 		<string>14.0.0</string>
 	</array>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb610433635813734</string>
+            </array>
+        </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>610433635813734</string>
+    <key>FacebookDisplayName</key>
+    <string>TornioMaps</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
+    </array>
 </dict>
 </plist>

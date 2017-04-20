@@ -5,8 +5,11 @@ import {
   StyleSheet,
   StatusBar,
 } from 'react-native';
-import pak from '@exponent/ex-navigation/package.json';
+
 import { Components } from 'exponent';
+import WalkRoutes from '../data/walkroutes';
+import { restaurantMarkers, routeMarkers } from '../data/markers';
+
 
 export default class MapScreen extends Component {
   /**
@@ -24,23 +27,7 @@ export default class MapScreen extends Component {
   constructor() {
   super();
   this.state = {
-    places: [
-      {
-        title: 'Aineen taidemuseo',
-        latitude: 65.846115,
-        longitude: 24.140909,
-      },
-      {
-        title: 'Rajalla Pa Gransen',
-        latitude: 65.843192,
-        longitude: 24.144621,
-      },
-      {
-        title: 'Hotelli Olof',
-        latitude: 65.846471,
-        longitude: 24.150497,
-      }
-    ]
+    
   };
 }
 
@@ -56,29 +43,19 @@ export default class MapScreen extends Component {
             latitudeDelta: 0.0422,
             longitudeDelta: 0.0221,
           }}
+          showUserLocation={true}
           >
+          {restaurantMarkers.map((marker, i) => (
           <Components.MapView.Marker
-            coordinate={{
-              latitude: 65.8442,
-              longitude: 24.1443,
-            }}
-            image={require('../assets/food1.png')}
+            key={i}
+            coordinate={marker.latlng}
+            title={marker.title}
+            description={marker.description}
+            image={marker.image}
           />
-          <Components.MapView.Marker
-            coordinate={{
-              latitude: 65.8472,
-              longitude: 24.1447,
-            }}
-            image={require('../assets/food1.png')}
-          />
-          <Components.MapView.Marker
-            coordinate={{
-              latitude: 65.8454,
-              longitude: 24.1474,
-            }}
-            image={require('../assets/food1.png')}
-          />
-          </Components.MapView>
+          
+          ))}
+         </Components.MapView>
         );
       case 'hotels':
          return( 
@@ -123,8 +100,38 @@ export default class MapScreen extends Component {
               longitude: 24.1453,
             }}
             radius = {100}
-            fillColor = {rgba(0,0,0,0.5)}
+            fillColor = {'#00BAF7'}
                       />
+          </Components.MapView>
+        );
+      case 'routes':
+        return(
+          <Components.MapView
+          style={{flex: 1}}
+          initialRegion={{
+            latitude: 65.8444,
+            longitude: 24.1449,
+            latitudeDelta: 0.0422,
+            longitudeDelta: 0.0221,
+          }}
+          >
+          {routeMarkers.map((marker, i) => (
+          <Components.MapView.Marker
+            key={i}
+            coordinate={marker.latlng}
+            title={marker.title}
+            description={marker.description}
+            image={marker.image}
+          />
+          
+          ))}
+           <Components.MapView.Polyline
+              coordinates={WalkRoutes}
+              strokeColor="#000"
+              fillColor="rgba(255,0,0,0.5)"
+              strokeWidth={2}
+              
+            />
           </Components.MapView>
         );
       default: return(

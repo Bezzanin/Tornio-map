@@ -81,6 +81,17 @@ _goToScreen = (name, option) => () => {
                 <Text style={styles.iconText} >Wifi</Text>                 
             </View>
             </TouchableOpacity>
+            <TouchableOpacity onPress={this._goToScreen('map', 'routes')}>
+            <View>
+              <View style={styles.placeIcon}>
+                  <Icon name="directions-walk" 
+                        size={60}
+                        color="#00BAF7"
+                        />
+              </View>
+                <Text style={styles.iconText} >Wifi</Text>                 
+            </View>
+            </TouchableOpacity>
         </ScrollView>
     );
   }
@@ -88,7 +99,7 @@ _goToScreen = (name, option) => () => {
 
 const styles = StyleSheet.create({
   iconsContainer: {
-    marginTop: -250,
+    marginTop: -280,
   },
   placeIcon: {
     width: 80,
@@ -104,7 +115,7 @@ const styles = StyleSheet.create({
     shadowOffset: {
       height: 3,
       width: 0
-    }
+    },
     
   },
   iconText: {

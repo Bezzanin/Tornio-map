@@ -15,7 +15,8 @@ import { Icon } from 'react-native-elements';
 import Weather from './components/Weather';
 import NewsList from './components/NewsList';
 import EventsList from './components/EventsList';
-import Icons from './components/Icons'
+import Icons from './components/Icons';
+import Calendar from 'react-native-calendar';
 
 
 export default class HomeScreen extends Component {
@@ -41,6 +42,7 @@ export default class HomeScreen extends Component {
         <Icons />
         <NewsList />
         <EventsList />
+        
       </ScrollView>
     );
   }
@@ -91,27 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     justifyContent: 'center',
     alignSelf: 'center',
-    fontSize: 25,
-  },
-  iconsContainer: {
-    marginTop: -250,
-  },
-  placeIcon: {
-    width: 80,
-    height: 80,
-    marginHorizontal: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 6,
-    shadowColor: "rgba(0,0,0,0.15)",
-    shadowOpacity: 0,
-    shadowRadius: 3,
-    shadowOffset: {
-      height: 3,
-      width: 0
-    }
-    
+    fontSize: 25,  
   },
   iconText: {
     justifyContent: 'center',
