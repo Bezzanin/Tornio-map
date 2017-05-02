@@ -4,6 +4,8 @@ import { Card, ListItem, Button } from 'react-native-elements'
 import { Router } from '../../main';
 import moment from 'moment';
 
+var _ = require('lodash');
+
 class EventsList extends Component {
 
   constructor(props) {
@@ -35,8 +37,9 @@ class EventsList extends Component {
     fetch('http://www.json.pub/kegs/1f947ee5ad3b/tap.json')
       .then((response) => response.json())
       .then((responseData) => {
+        var results = _.uniqBy(responseData.events, 'id');
         this.setState({
-          events: responseData.events,
+          events: results,
         });
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(this.state.events),
@@ -97,19 +100,7 @@ class EventsList extends Component {
         }}
         />
 
-  {/*<Card
-  title='Toranda on Ice 2'
-  image={require('../../assets/pict3.png')}>
-  <Text style={{marginBottom: 10}}>
-    Toranda on Ice is a regular event with a lot of activities and concerts.
-  </Text>
-  <Button
-    onPress={this.handleClick2}
-    icon={{name: 'code'}}
-    backgroundColor='#03A9F4'
-    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-    title='VIEW NOW' />
-</Card>*/}
+
       </ScrollView>
     );
   }

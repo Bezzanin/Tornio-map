@@ -9,34 +9,76 @@ import {
 import { Components } from 'exponent';
 import WalkRoutes from '../data/walkroutes';
 import { restaurantMarkers, routeMarkers } from '../data/markers';
-
+import Filters from './components/Filters';
+import Layout from '../constants/Layout';
+import Icons from './components/Icons';
+import MarkersList from './components/MarkersList';
+import ModalDropdown from 'react-native-modal-dropdown';
+import MapDropDown from '.components/MapDropDown';
 
 export default class MapScreen extends Component {
-  /**
-    * This is where we can define any route configuration for this
-    * screen. For example, in addition to the navigationBar title we
-    * could add backgroundColor.
-    */
+
+  
+
   static route = {
     navigationBar: {
       title: 'Map',
-      tintColor: "#000",
+      tintColor: "#FFFFFF",
     },
   }
 
   constructor() {
   super();
   this.state = {
-    
+    AllMarkers: [],
+    CategoryMarkers: [],
+    option: '',
+    slug: '',
   };
+  this.findMarkers = this.findMarkers.bind(this);
+}
+
+  componentWillMount() {
+    const { option } = this.props.route.params;
+    this.setState({
+           option
+        });
+    fetch('http://test.madeinyaba.com/api/get_posts/?post_type=markers')
+      .then((response) => response.json())
+      .then((responseData) => {
+        this.setState({
+           AllMarkers: responseData.posts,
+        });
+      })
+      .done();
+      
+      
+    };
+    
+  componentDidMount() {
+  this.findMarkers(this.state.option);
+  console.log(this.state.option);
+  console.log(this.state.slug);
+  console.log(this.state.CategoryMarkers)
+}
+
+findMarkers = (option) => {
+  let newMarkers = this.state.AllMarkers.filter((all) => {
+    return (all.categories[0].slug == option)
+    
+  });
+  this.setState({
+      CategoryMarkers: newMarkers,
+    });
 }
 
   render() {
-    switch(this.props.route.params.option) {
-      case 'restaurants': 
-        return( 
+ 
+        return(
+          <View style={styles.container}>
+            
           <Components.MapView
-          style={{flex: 1}}
+          style={styles.map}
           initialRegion={{
             latitude: 65.8444,
             longitude: 24.1449,
@@ -45,109 +87,34 @@ export default class MapScreen extends Component {
           }}
           showUserLocation={true}
           >
-          {restaurantMarkers.map((marker, i) => (
+          {this.state.AllMarkers.map((marker, i) => (
           <Components.MapView.Marker
             key={i}
-            coordinate={marker.latlng}
+            coordinate = {{
+              latitude: parseFloat(marker.taxonomy_latitude[0].title),
+              longitude: parseFloat(marker.taxonomy_longitude[0].title)
+            }}
             title={marker.title}
-            description={marker.description}
-            image={marker.image}
+            description={marker.content.replace(/(<([^>]+)>)/ig,"")}
           />
           
           ))}
          </Components.MapView>
+         <MarkersList />
+         <MapDropDown />
+          </View>
         );
-      case 'hotels':
-         return( 
-          <Components.MapView
-          style={{flex: 1}}
-          initialRegion={{
-            latitude: 65.8444,
-            longitude: 24.1449,
-            latitudeDelta: 0.0422,
-            longitudeDelta: 0.0221,
-          }}
-          >
-            <Components.MapView.Marker
-              coordinate={{
-                latitude: 65.8438,
-                longitude: 24.1426,
-              }}
-            />
-          <Components.MapView.Marker
-            coordinate={{
-              latitude: 65.8450,
-              longitude: 24.1453,
-            }}
-          />
-       </Components.MapView>
-        );
-      case 'activities':
-      case 'wi-fi zones':
-        return(
-           <Components.MapView
-          style={{flex: 1}}
-          initialRegion={{
-            latitude: 65.8444,
-            longitude: 24.1449,
-            latitudeDelta: 0.0422,
-            longitudeDelta: 0.0221,
-          }}
-          >
-          <Components.MapView.Circle
-            center={{
-              latitude: 65.8450,
-              longitude: 24.1453,
-            }}
-            radius = {100}
-            fillColor = {'#00BAF7'}
-                      />
-          </Components.MapView>
-        );
-      case 'routes':
-        return(
-          <Components.MapView
-          style={{flex: 1}}
-          initialRegion={{
-            latitude: 65.8444,
-            longitude: 24.1449,
-            latitudeDelta: 0.0422,
-            longitudeDelta: 0.0221,
-          }}
-          >
-          {routeMarkers.map((marker, i) => (
-          <Components.MapView.Marker
-            key={i}
-            coordinate={marker.latlng}
-            title={marker.title}
-            description={marker.description}
-            image={marker.image}
-          />
-          
-          ))}
-           <Components.MapView.Polyline
-              coordinates={WalkRoutes}
-              strokeColor="#000"
-              fillColor="rgba(255,0,0,0.5)"
-              strokeWidth={2}
-              
-            />
-          </Components.MapView>
-        );
-      default: return(
-        <View></View>
-      );
-    }
-
+    
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fafafa',
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+  map: {
+    width: Layout.window.width,
+    height: Layout.window.height
   },
   title: {
     fontWeight: 'bold',

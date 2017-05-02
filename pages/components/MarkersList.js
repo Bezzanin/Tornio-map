@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, ScrollView, ListView, Keyboard, Linking } from "react-native";
 
-import NewsItem from './NewsItem'
+import MarkersItem from './MarkersItem';
 
 
 
-class NewsList extends Component {
+class MarkersList extends Component {
 
 
 
@@ -19,7 +19,7 @@ class NewsList extends Component {
 }
 
   componentWillMount() {
-    fetch('http://test.madeinyaba.com/api/get_posts/')
+    fetch('http://test.madeinyaba.com/api/get_posts/?post_type=markers')
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
@@ -35,6 +35,7 @@ class NewsList extends Component {
     return (
         <View>
         <ListView
+        style={styles.newsScroll}
         showsHorizontalScrollIndicator={false}
         horizontal={true}
         enableEmptySections 
@@ -53,7 +54,7 @@ class NewsList extends Component {
           };
 
             return (
-                <NewsItem
+                <MarkersItem
                     title={article.title}
                     description={article.content.replace(/(<([^>]+)>)/ig,"")}
                     onPress={handleClick}
@@ -68,9 +69,10 @@ class NewsList extends Component {
 
 const styles = StyleSheet.create({
    newsScroll: {
-    backgroundColor: 'transparent',
+    marginTop: -350,
+    height: 200
   },
   });
 
-export default NewsList;
+export default MarkersList;
 

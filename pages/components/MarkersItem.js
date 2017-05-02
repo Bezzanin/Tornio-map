@@ -6,14 +6,14 @@ import {
   Image
 } from 'react-native';
 
-export default function NewsItem({ title, description, image, onPress }) {
+export default function MarkersItem ({ title, description, image, onPress }) {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity  onPress={onPress} style={styles.container}>
       <Text style={styles.title}>{title}</Text>
       {/*<Image source={{uri: image}} style={{flex: 1, resizeMode: 'cover'}}></Image>*/}
       <Text adjustsFontSizeToFit={false} 
       style={styles.description}
-      numberOfLines={5}
+      numberOfLines={3}
       >{description}</Text>
     </TouchableOpacity>
   );
@@ -24,14 +24,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
     backgroundColor: '#fff',
-    // borderBottomWidth: StyleSheet.hairlineWidth,
-    // borderBottomColor: 'rgba(0, 0, 0, .1)',
     borderWidth: 0,
     borderColor: 'black',
     borderRadius: 5,
     paddingHorizontal: 14,
     width: 300,
     minHeight: 100,
+    maxHeight: 150,
     paddingVertical: 15,
     marginHorizontal: 15,
     shadowColor: "#000000",

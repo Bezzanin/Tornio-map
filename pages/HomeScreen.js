@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import NewsItem from './components/NewsItem';
 import { Router } from '../main';
-// import Icons from './components/Icons';
 import { Icon } from 'react-native-elements';
 import Weather from './components/Weather';
 import NewsList from './components/NewsList';

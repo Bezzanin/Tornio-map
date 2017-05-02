@@ -25,8 +25,8 @@ _goToScreen = (name, option) => () => {
 
   render() {
     return (
-      <ScrollView horizontal style={styles.iconsContainer}>
-          <TouchableOpacity onPress={this._goToScreen('map', 'restaurants')}>
+      <ScrollView horizontal style={styles.iconsContainer} showsHorizontalScrollIndicator={false}>
+          <TouchableOpacity onPress={this._goToScreen('map', "restaurant")}>
             <View>
               <View style={styles.placeIcon}>
                   <Icon name="restaurant" 
@@ -37,7 +37,7 @@ _goToScreen = (name, option) => () => {
                 <Text style={styles.iconText} >Restaurants</Text>                 
             </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={this._goToScreen('map', 'hotels')}>
+            <TouchableOpacity onPress={this._goToScreen('map', 'hotel')}>
             <View>
               <View style={styles.placeIcon}>
                   <Icon name="hotel" 
@@ -48,7 +48,7 @@ _goToScreen = (name, option) => () => {
                 <Text style={styles.iconText} >Hotels</Text>                 
             </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={this._goToScreen('map', 'activities')}>
+            <TouchableOpacity onPress={this._goToScreen('map', 'activity')}>
             <View>
               <View style={styles.placeIcon}>
                   <Icon name="local-activity" 
@@ -59,7 +59,7 @@ _goToScreen = (name, option) => () => {
                 <Text style={styles.iconText} >Activity</Text>                 
             </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={this._goToScreen('map', 'stores')}>
+            <TouchableOpacity onPress={this._goToScreen('map', 'store')}>
             <View>
               <View style={styles.placeIcon}>
                   <Icon name="store" 
@@ -70,7 +70,7 @@ _goToScreen = (name, option) => () => {
                 <Text style={styles.iconText} >Malls</Text>                 
             </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={this._goToScreen('map', 'wi-fi zones')}>
+            <TouchableOpacity onPress={this._goToScreen('map', 'wi-fi-zone')}>
             <View>
               <View style={styles.placeIcon}>
                   <Icon name="wifi" 
@@ -81,7 +81,7 @@ _goToScreen = (name, option) => () => {
                 <Text style={styles.iconText} >Wifi</Text>                 
             </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={this._goToScreen('map', 'routes')}>
+            <TouchableOpacity onPress={this._goToScreen('map', 'route')}>
             <View>
               <View style={styles.placeIcon}>
                   <Icon name="directions-walk" 
