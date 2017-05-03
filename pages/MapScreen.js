@@ -14,7 +14,7 @@ import Layout from '../constants/Layout';
 import Icons from './components/Icons';
 import MarkersList from './components/MarkersList';
 import ModalDropdown from 'react-native-modal-dropdown';
-import MapDropDown from '.components/MapDropDown';
+import MapDropDown from './components/MapDropDown';
 
 export default class MapScreen extends Component {
 
@@ -34,8 +34,11 @@ export default class MapScreen extends Component {
     CategoryMarkers: [],
     option: '',
     slug: '',
+    initialPosition: 'unknown',
+    lastPosition: 'unknown',
   };
   this.findMarkers = this.findMarkers.bind(this);
+  this.handleClick = this.handleClick.bind(this);
 }
 
   componentWillMount() {
@@ -54,23 +57,47 @@ export default class MapScreen extends Component {
       
       
     };
-    
   componentDidMount() {
-  this.findMarkers(this.state.option);
-  console.log(this.state.option);
-  console.log(this.state.slug);
-  console.log(this.state.CategoryMarkers)
+  
+   this.timeout = setTimeout(() =>  {this.findMarkers(this.state.option)}, 1000);
+
+   navigator.geolocation.getCurrentPosition(
+      (position) => {
+        var initialPosition = JSON.stringify(position);
+        this.setState({initialPosition});
+      },
+      (error) => alert(JSON.stringify(error)),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
+    this.watchID = navigator.geolocation.watchPosition((position) => {
+      var lastPosition = JSON.stringify(position);
+      this.setState({lastPosition});
+    });
+  
 }
+componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.watchID);
+  }
 
 findMarkers = (option) => {
-  let newMarkers = this.state.AllMarkers.filter((all) => {
-    return (all.categories[0].slug == option)
+  var newMarkers = this.state.AllMarkers.filter((marker) => {
+    //console.log('This is slug' + marker.categories[0].slug)
+    return (marker.categories[0].slug === option);
     
   });
   this.setState({
       CategoryMarkers: newMarkers,
     });
 }
+
+handleClick(idx, value) {
+    this.setState({
+           option: value,
+        });
+    this.timeout = setTimeout(() =>  {this.findMarkers(this.state.option)}, 100);
+    console.log(this.state.initialPosition);
+    console.log(this.state.lastPosition);
+  }
 
   render() {
  
@@ -86,8 +113,9 @@ findMarkers = (option) => {
             longitudeDelta: 0.0221,
           }}
           showUserLocation={true}
+          followUserLocation={true}
           >
-          {this.state.AllMarkers.map((marker, i) => (
+          {this.state.CategoryMarkers.map((marker, i) => (
           <Components.MapView.Marker
             key={i}
             coordinate = {{
@@ -100,8 +128,12 @@ findMarkers = (option) => {
           
           ))}
          </Components.MapView>
-         <MarkersList />
-         <MapDropDown />
+         <MarkersList 
+          markers={this.state.CategoryMarkers}
+         />
+         <MapDropDown 
+         option={this.state.option}
+         handleClick = {this.handleClick} />
           </View>
         );
     
@@ -111,6 +143,7 @@ findMarkers = (option) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    position: 'relative'
   },
   map: {
     width: Layout.window.width,

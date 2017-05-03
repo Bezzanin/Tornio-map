@@ -3,7 +3,7 @@
 try {
     var path = require("path");
     var Launcher = require("/Users/student/.vscode/extensions/vsmobile.vscode-react-native-0.2.5/out/debugger/launcher.js").Launcher;
-    new Launcher("/Users/student/Documents/ReactDev/Exponent/uiexample", "/Users/student/Documents/ReactDev/Exponent/uiexample").launch();
+    new Launcher("/Users/student/Documents/ReactDev/Exponent/Tornio-map", "/Users/student/Documents/ReactDev/Exponent/Tornio-map").launch();
 } catch (e) {
     throw new Error("Unable to launch application. Try deleting .vscode/launchReactNative.js and restarting vscode.");
 }

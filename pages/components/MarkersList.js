@@ -18,15 +18,12 @@ class MarkersList extends Component {
     }
 }
 
-  componentWillMount() {
-    fetch('http://test.madeinyaba.com/api/get_posts/?post_type=markers')
-      .then((response) => response.json())
-      .then((responseData) => {
+  componentDidMount() {
+    this.timeout = setTimeout(() => {
         this.setState({
-           dataSource: this.state.dataSource.cloneWithRows(responseData.posts),
+           dataSource: this.state.dataSource.cloneWithRows(this.props.markers),
         });
-      })
-      .done();
+    }, 1100)
       };
 
     
@@ -69,7 +66,8 @@ class MarkersList extends Component {
 
 const styles = StyleSheet.create({
    newsScroll: {
-    marginTop: -350,
+    position: 'absolute',
+    bottom: 60,
     height: 200
   },
   });

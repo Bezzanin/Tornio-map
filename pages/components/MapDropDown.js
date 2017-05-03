@@ -7,14 +7,15 @@ import {
   TouchableOpacity,
   TouchableHighlight,
   ScrollView,
+  Platform
 } from 'react-native';
 
 import ModalDropdown from 'react-native-modal-dropdown';
-import Layout from '../constants/Layout';
+import Layout from '../../constants/Layout';
 
 
 const DEMO_OPTIONS_2 = [
-  'restaurants', 'hotels', 'Activities', 'Wi-Fi Zones'
+  'restaurant', 'hotel', 'activity', 'shop'
 ];
 
 class MapDropDown extends Component {
@@ -31,11 +32,12 @@ class MapDropDown extends Component {
         <View style={styles.cell}>
             <ModalDropdown style={styles.dropdown_2}
                            textStyle={styles.dropdown_2_text}
+                           defaultValue={this.capitalizeFirstLetter(this.props.option)}
                            dropdownStyle={styles.dropdown_2_dropdown}
                            options={DEMO_OPTIONS_2}
                            renderRow={this._dropdown_2_renderRow.bind(this)}
                            renderSeparator={(sectionID, rowID) => this._dropdown_2_renderSeparator(sectionID, rowID)}
-                           onSelect={(idx, value) => this.handleClick(idx, value)}
+                           onSelect={(idx, value) => this.props.handleClick(idx, value)}
             />
         </View>
       </View>
@@ -58,11 +60,9 @@ class MapDropDown extends Component {
     return rowData.charAt(0).toUpperCase() + rowData.slice(1);
 }
 
-  handleClick(idx, value) {
-    console.log(idx, value);
-  }
+  
   _dropdown_2_renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
-    if (rowID == DEMO_OPTIONS_1.length - 1) return;
+    if (rowID == DEMO_OPTIONS_2.length - 1) return;
     let key = `spr_${rowID}`;
     return (<View style={styles.dropdown_2_separator}
                   key={key}
@@ -74,6 +74,8 @@ class MapDropDown extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    position: 'absolute',
+    bottom: 0,
   },
   row: {
     flex: 1,
@@ -81,15 +83,9 @@ const styles = StyleSheet.create({
   },
   cell: {
     flex: 1,
-    borderWidth: StyleSheet.hairlineWidth,
   },
   scrollView: {
     flex: 1,
-  },
-  contentContainer: {
-    height: 500,
-    paddingVertical: 100,
-    paddingLeft: 20,
   },
   textButton: {
     color: 'deepskyblue',
@@ -98,29 +94,25 @@ const styles = StyleSheet.create({
     margin: 2,
   },
   dropdown_2: {
-    width: Layout.window.width * 0.9,
+    width: Layout.window.width,
+    height: 50,
     alignSelf: 'center',
-    top: 600,
     bottom: 0,
-    marginHorizontal: 10,
     borderWidth: 0,
-    borderRadius: 3,
     backgroundColor: 'cornflowerblue',
   },
   dropdown_2_text: {
     alignSelf: 'stretch',
-    marginVertical: 10,
-    marginHorizontal: 6,
+    height: 50,
+    marginTop: (Platform.OS === 'ios') ? 15 : 0,
     fontSize: 18,
     color: 'white',
     textAlign: 'center',
     textAlignVertical: 'center',
   },
   dropdown_2_dropdown: {
-    width: width * 0.9,
+    width: Layout.window.width,
     borderWidth: 0,
-    borderColor: 'black',
-    borderRadius: 5,
     shadowColor: "#000000",
     shadowOpacity: 0.1,
     shadowRadius: 5,
@@ -128,15 +120,17 @@ const styles = StyleSheet.create({
       height: 1,
       width: 0
     },
+    marginBottom: 40,
   },
   dropdown_2_row: {
     alignSelf: 'stretch',
     flexDirection: 'row',
     height: 40,
     alignItems: 'center',
+    
   },
   dropdown_2_row_text: {
-    width: width * 0.9,
+    width: Layout.window.width * 0.9,
     textAlign: 'center',
     marginHorizontal: 4,
     fontSize: 16,
