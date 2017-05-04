@@ -16,7 +16,7 @@ constructor(props) {
    
  }
   componentWillMount() {
-    fetch('https://api.forecast.io/forecast/' + APIKEY + '/65.8444,24.1449?units=si')
+    fetch('https://api.forecast.io/forecast/' + APIKEY + '/65.8444,24.1449?units=si&lang=fi')
       .then(res => res.json())
       //this.setState is our method of telling react that we changed something and it needs to re-render our application and figure out what changed
       .then(resJson => this.setState({
@@ -37,7 +37,7 @@ constructor(props) {
             <Text style={styles.lowerText1}>Tornio</Text>
             <Text style={styles.lowerText}> Temperature: {Math.round(this.state.temperature) + "°C"} </Text>
             <Text style={styles.lowerText}> Humidity: {this.state.humidity} </Text>
-  				  <Text style={styles.lowerText}> Wind Speed: {this.state.windSpeed} </Text>
+  				  <Text style={styles.lowerText}> {this.state.summary} </Text>
   				</View>
 
         </Image>

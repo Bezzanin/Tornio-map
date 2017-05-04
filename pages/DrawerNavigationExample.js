@@ -55,8 +55,7 @@ export default class DrawerNavigationExample extends Component {
         <DrawerNavigationItem
           id="home"
           selectedStyle={styles.selectedItemStyle}
-          renderTitle={isSelected => this._renderTitle('Dashboard', isSelected)}
-          renderIcon={isSelected => this._renderIcon('md-apps', isSelected)}>
+          renderTitle={isSelected => this._renderTitle('Home', isSelected)}>
           <StackNavigation
             id="root"
             defaultRouteConfig={{
@@ -69,19 +68,18 @@ export default class DrawerNavigationExample extends Component {
           />
         </DrawerNavigationItem>
         <DrawerNavigationItem
-          id="another"
+          id="timetable"
           selectedStyle={styles.selectedItemStyle}
-          renderTitle={isSelected => this._renderTitle('Timetable', isSelected)}
-          renderIcon={isSelected => this._renderIcon('md-alert', isSelected)}>
+          renderTitle={isSelected => this._renderTitle('Timetable', isSelected)}>
           <StackNavigation
-            id="about"
+            id="timetable"
             defaultRouteConfig={{
               navigationBar: {
                 backgroundColor: '#0084FF',
                 tintColor: '#fff',
               },
             }}
-            initialRoute={Router.getRoute('about')}
+            initialRoute={Router.getRoute('timetable')}
           />
         </DrawerNavigationItem>
       </DrawerNavigation>

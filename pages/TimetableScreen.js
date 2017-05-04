@@ -27,7 +27,7 @@ const filterItems = (filter, SininenLinja) => {
     })
 }
 
-export default class HomeScreen extends Component {
+export default class TimetableScreen extends Component {
 
 
 componentDidMount() {

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { StatusBar } from 'react-native';
 import DrawerNavigationExample from './pages/DrawerNavigationExample';
 import HomeScreen from './pages/HomeScreen';
-import AboutScreen from './pages/AboutScreen';
+import TimetableScreen from './pages/TimetableScreen';
 import MapScreen from './pages/MapScreen';
 import EventList from './pages/components/EventsList'
 
@@ -13,17 +13,8 @@ import {
 } from '@exponent/ex-navigation';
 
 const assets = [
-  require('./assets/beetle.jpg'),
-  require('./assets/cat.gif'),
-  require('./assets/colorful-windows.jpg'),
-  require('./assets/paintbrush.jpg'),
-  require('./assets/space.jpg'),
-  require('./assets/sparkles.jpg'),
-  require('./assets/torniologo.png'),
-  require('./assets/torniohaparanda.png'),
-  require('./assets/Tower.jpg')
-];
 
+];
 /**
   * This is where we map route names to route components. Any React
   * component can be a route, it only needs to have a static `route`
@@ -31,7 +22,7 @@ const assets = [
   */
 export const Router = createRouter(() => ({
   home: () => HomeScreen,
-  about: () => AboutScreen,
+  timetable: () => TimetableScreen,
   map: () => MapScreen,
   EventList: () => EventListScreen,
   
