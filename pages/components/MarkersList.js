@@ -14,7 +14,8 @@ class MarkersList extends Component {
     super(props);
     this.state = {
        news: null,
-       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+       listMarkers: this.props.markers
     }
 }
 
@@ -25,6 +26,16 @@ class MarkersList extends Component {
         });
     }, 1100)
       };
+
+componentWillReceiveProps(nextProps) {
+    if((this.props.markers) !== (nextProps.markers)) // Check if new markers are different from old
+    {
+    this.setState({
+           dataSource: this.state.dataSource.cloneWithRows(nextProps.markers),
+        });
+    }
+   
+} 
 
     
   render() {

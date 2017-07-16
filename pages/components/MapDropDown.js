@@ -15,7 +15,7 @@ import Layout from '../../constants/Layout';
 
 
 const DEMO_OPTIONS_2 = [
-  'restaurant', 'hotel', 'activity', 'shop'
+  'all', 'restaurant', 'hotel', 'activity', 'shop', 'route'
 ];
 
 class MapDropDown extends Component {
@@ -24,6 +24,12 @@ class MapDropDown extends Component {
 
     this.state = {
     };
+  }
+
+  componentWillMount() {
+    if (typeof this.props.option === 'undefined') {
+
+    }
   }
 
   render() {
@@ -56,8 +62,12 @@ class MapDropDown extends Component {
     );
   }
 
-  capitalizeFirstLetter(rowData) {
+  capitalizeFirstLetter= (rowData) => {
+    if (typeof rowData === 'undefined') {
+      return 'All'
+    } else {
     return rowData.charAt(0).toUpperCase() + rowData.slice(1);
+    }
 }
 
   
@@ -99,7 +109,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     bottom: 0,
     borderWidth: 0,
-    backgroundColor: 'cornflowerblue',
+    backgroundColor: '#0F64F7',
   },
   dropdown_2_text: {
     alignSelf: 'stretch',

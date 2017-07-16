@@ -57,6 +57,8 @@ class NewsList extends Component {
                     title={article.title}
                     description={article.content.replace(/(<([^>]+)>)/ig,"")}
                     onPress={handleClick}
+                    date={article.date}
+                    author={article.author.name}
                 />
             )
         }}

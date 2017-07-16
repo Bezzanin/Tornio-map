@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    borderColor: "#CE0707",
+    borderColor: "#0F64F7",
     borderWidth: 1,
     borderRadius: 5
   },
@@ -46,14 +46,14 @@ const styles = StyleSheet.create({
   filterMiddle: {
     borderLeftWidth: 1,
     borderRightWidth: 1,
-    borderColor: "#CE0606"
+    borderColor: "#0F64F7"
   },
   filterText: {
-    color: '#CE0606',
+    color: '#0F64F7',
     fontSize: 14
   },
   selected: {
-    backgroundColor: '#CE0606',
+    backgroundColor: '#0F64F7',
   },
   selectedText: {
     color: '#fff'

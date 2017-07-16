@@ -3,9 +3,11 @@ import { View, Text, StyleSheet, TouchableOpacity, WebView, Linking, ListView, S
 import { Card, ListItem, Button } from 'react-native-elements'
 import { Router } from '../../main';
 import moment from 'moment';
-
+import Layout from '../../constants/Layout';
+import { withNavigation } from '@exponent/ex-navigation';
 var _ = require('lodash');
 
+@withNavigation
 class EventsList extends Component {
 
   constructor(props) {
@@ -28,8 +30,15 @@ class EventsList extends Component {
     url: React.PropTypes.string,
   };
 
-    _goToScreen = (name, option) => () => {
-    this.props.navigator.push(Router.getRoute(name, { option }));
+    _goToScreen = (name, option, lati, longi, venueName, venueAbout) => () => {
+    this.props.navigator.push(Router.getRoute(name, { 
+      option: option,
+      lati: lati,
+      longi: longi,
+      venueName: venueName,
+      venueAbout: venueAbout   }));
+    console.log(lati);
+    console.log(longi)
   }
 
 
@@ -47,12 +56,6 @@ class EventsList extends Component {
       })
       .done();
       };
-
-
-    
-  
-
-
 
   render() {
     return (
@@ -76,25 +79,27 @@ class EventsList extends Component {
           };
 
             return (
-            <Card
+              <Card
+                containerStyle={styles.container}
                 image={{uri: event.coverPicture}}
-                title={event.name}>
+                title={event.name}
+                titleStyle={{fontWeight: 'bold', fontSize: 24, padding: 6, marginBottom: 0}}>
+                <Text style={styles.day}>{moment(event.startTime).format('DD-MM-YY')} in {event.venue.name}</Text>
               <Text 
-                numberOfLines={15}
-                style={{marginBottom: 10}}
+                numberOfLines={8}
+                style={{fontSize: 16, lineHeight: 25, fontWeight: '300', padding: 6}}
                 >{event.description}</Text>
-              <Text
-                style={{marginBottom: 10}}
-                >Date: {moment(event.startTime).format('LLL')}</Text>
-              <Text
-                style={{marginBottom: 10}}
-                >Place: {event.venue.name}</Text>
-              <Button
-                onPress={handleClick}
-                icon={{name: 'code'}}
-                backgroundColor='#03A9F4'
-                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                title='Read More' />
+              <TouchableOpacity  onPress={handleClick}>
+                <Text style={styles.day}>Read More</Text>
+              </TouchableOpacity>
+              <View style={styles.separator} />
+              <TouchableOpacity  onPress={this._goToScreen('map', "event", 
+              event.venue.location.latitude, 
+              event.venue.location.longitude, 
+              event.venue.name, 
+              event.venue.about)}>
+                <Text style={styles.mapButton}>Show On Map</Text>
+              </TouchableOpacity>
               </Card>
             )
         }}
@@ -105,6 +110,66 @@ class EventsList extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  date: {
+    backgroundColor: '#FED500',
+    opacity: 1,
+    borderRadius: 10,
+    width: 60,
+    height: 60,
+    shadowColor: "#000000",
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    },
+    marginTop: -60,
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  container: {
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    backgroundColor: '#FFFFFF',
+    borderWidth: 0,
+    borderRadius: 5,
+    width: Layout.window.width*0.9,
+    minHeight: 100,
+    marginHorizontal: 15,
+    shadowColor: "#000000",
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    shadowOffset: {
+      height: 3,
+      width: 0
+    },
+    marginVertical: 15,
+  },
+  day: {
+    fontWeight: 'bold',
+    fontSize: 14,
+    color: '#120F2B',
+    opacity: 0.50,
+    marginTop: -8,
+    marginBottom: 8,
+    padding: 6,
+  },
+  separator: {
+    backgroundColor: '#E7E7E7',
+    alignSelf: 'stretch',
+    height: 1,
+    marginBottom: 8,
+  },
+  mapButton: {
+    fontSize: 16,
+    color: '#0F64F7',
+    alignSelf: 'flex-end',
+    fontWeight: '500'
+  }
+});
 
 export default EventsList;
 

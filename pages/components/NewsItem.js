@@ -6,7 +6,9 @@ import {
   Image
 } from 'react-native';
 
-export default function NewsItem({ title, description, image, onPress }) {
+import moment from 'moment';
+
+export default function NewsItem({ title, description, image, onPress, date, author }) {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Text style={styles.title}>{title}</Text>
@@ -15,6 +17,10 @@ export default function NewsItem({ title, description, image, onPress }) {
       style={styles.description}
       numberOfLines={5}
       >{description}</Text>
+
+      <Text adjustsFontSizeToFit={false} 
+      style={styles.date}
+      >{moment(date).format('DD.MM.YY')} by {author}</Text>
     </TouchableOpacity>
   );
 }
@@ -23,37 +29,41 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     justifyContent: 'space-around',
-    backgroundColor: '#fff',
-    // borderBottomWidth: StyleSheet.hairlineWidth,
-    // borderBottomColor: 'rgba(0, 0, 0, .1)',
+    backgroundColor: '#0F64F7',
     borderWidth: 0,
-    borderColor: 'black',
     borderRadius: 5,
     paddingHorizontal: 14,
     width: 300,
     minHeight: 100,
-    paddingVertical: 15,
+    paddingVertical: 16,
     marginHorizontal: 15,
-    shadowColor: "#000000",
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
+    shadowColor: "#3076F0",
+    shadowOpacity: 0.5,
+    shadowRadius: 7,
     shadowOffset: {
-      height: 1,
+      height: 3,
       width: 0
     },
-    marginVertical: 5,
+    marginVertical: 16,
+    zIndex: 11
   },
 
   title: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#222',
+    color: '#FFF',
     margin: 2,
   },
 
   description: {
     fontSize: 12,
-    color: '#888',
+    color: '#FFF',
     margin: 2,
+  },
+  date: {
+    fontSize: 12,
+    color: '#FFF',
+    margin: 2,
+    fontWeight: 'bold'
   },
 });

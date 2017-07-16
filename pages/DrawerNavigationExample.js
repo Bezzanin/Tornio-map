@@ -4,6 +4,7 @@ import {
   View,
   Text,
   Image,
+  StatusBar
 } from 'react-native';
 import {
   StackNavigation,
@@ -60,11 +61,26 @@ export default class DrawerNavigationExample extends Component {
             id="root"
             defaultRouteConfig={{
               navigationBar: {
-                backgroundColor: '#0084FF',
-                tintColor: '#fff',
+                backgroundColor: '#FFF',
+                tintColor: '#000',
               },
             }}
             initialRoute={Router.getRoute('home')}
+          />
+        </DrawerNavigationItem>
+        <DrawerNavigationItem
+          id="map"
+          selectedStyle={styles.selectedItemStyle}
+          renderTitle={isSelected => this._renderTitle('Map', isSelected)}>
+          <StackNavigation
+            id="root"
+            defaultRouteConfig={{
+              navigationBar: {
+                backgroundColor: '#FFF',
+                tintColor: '#000',
+              },
+            }}
+            initialRoute={Router.getRoute('map')}
           />
         </DrawerNavigationItem>
         <DrawerNavigationItem
@@ -75,8 +91,8 @@ export default class DrawerNavigationExample extends Component {
             id="timetable"
             defaultRouteConfig={{
               navigationBar: {
-                backgroundColor: '#0084FF',
-                tintColor: '#fff',
+                backgroundColor: '#FFF',
+                tintColor: '#000',
               },
             }}
             initialRoute={Router.getRoute('timetable')}

@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  StatusBar
 } from 'react-native';
 import NewsItem from './components/NewsItem';
 import { Router } from '../main';
@@ -16,6 +17,7 @@ import NewsList from './components/NewsList';
 import EventsList from './components/EventsList';
 import Icons from './components/Icons';
 import Calendar from 'react-native-calendar';
+import common from '../constants/common'
 
 
 export default class HomeScreen extends Component {
@@ -36,10 +38,15 @@ export default class HomeScreen extends Component {
     
     return (
       <ScrollView>
+              <StatusBar
+     barStyle="dark-content"
+        />
         <Weather />
-        <View style={styles.bgRectangular} />
+        <Text style={common.headers}>Discover Locations</Text>
         <Icons />
+        <Text style={common.headers}>Promotions</Text>
         <NewsList />
+        <Text style={common.headers}>Events</Text>
         <EventsList />
         
       </ScrollView>
@@ -51,18 +58,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fafafa',
-  },
-  bgRectangular: {
-    height: 300,
-    width: 500,
-    alignSelf: 'stretch',
-    backgroundColor: '#00BAF7',
-    transform: [
-      {skewY: '170deg'}
-    ],
-    zIndex: -1,
-    marginTop: -40,
-    marginLeft: -30,
   },
  
   center: {
